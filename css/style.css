@@ -1,0 +1,591 @@
+:root {
+    --primary-blue: #1a56db;
+    --secondary-blue: #3b82f6;
+    --accent-orange: #f59e0b;
+    --dark-blue: #1e3a8a;
+    --light-gray: #f8fafc;
+    --medium-gray: #e2e8f0;
+    --dark-gray: #4b5563;
+    --white: #ffffff;
+    --shadow-light: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --shadow-medium: 0 10px 25px rgba(0, 0, 0, 0.1);
+    --shadow-heavy: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: var(--white); /* White base for overall theme */
+    overflow-x: hidden; /* Prevent horizontal scroll on animations */
+}
+/* Hero Section - Blue gradient background with white text overlays */
+.hero-section {
+    background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 50%, var(--dark-blue) 100%);
+    color: var(--white);
+    padding: 120px 0;
+    position: relative;
+    overflow: hidden;
+    animation: heroGradientShift 8s ease-in-out infinite alternate;
+   
+}
+
+@keyframes heroGradientShift {
+    0% { background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 50%, var(--dark-blue) 100%); }
+    100% { background: linear-gradient(135deg, var(--secondary-blue) 0%, var(--dark-blue) 50%, var(--primary-blue) 100%); }
+}
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.1)"/></svg>'); /* Slightly more visible white overlay for theme */
+    background-size: cover;
+    animation: subtleWave 6s ease-in-out infinite;
+}
+
+@keyframes subtleWave {
+    0%, 100% { opacity: 0.1; transform: translateX(0); }
+    50% { opacity: 0.2; transform: translateX(10px); }
+}
+
+.hero-image {
+    border-radius: 15px;
+    box-shadow: var(--shadow-heavy);
+    transform: perspective(1000px) rotateY(-5deg) scale(0.95);
+    transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    width: 500px;
+    height: 400px;
+    object-fit: cover; /* Ensures images fit attractively */
+    background: var(--white); /* White fallback if no image */
+    animation: heroImageGlow 4s ease-in-out infinite alternate;
+}
+
+@keyframes heroImageGlow {
+    from { box-shadow: var(--shadow-heavy); }
+    to { box-shadow: 0 25px 50px rgba(59, 130, 246, 0.3); } /* Blue glow for theme */
+}
+
+.hero-image:hover {
+    transform: perspective(1000px) rotateY(0deg) scale(1.02);
+    box-shadow: 0 30px 60px rgba(26, 86, 219, 0.4); /* Enhanced blue shadow */
+}
+
+/* Section Titles - White underline with blue accent */
+.section-title {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 15px;
+    font-weight: 700;
+    color: var(--primary-blue); /* Blue text for titles */
+    padding-top: 70px;
+    animation: slideInFromTop 0.8s ease-out;
+}
+
+@keyframes slideInFromTop {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary-blue), var(--white)); /* Blue to white gradient underline */
+    border-radius: 2px;
+    transition: width 0.4s ease;
+}
+
+.section-title:hover::after {
+    width: 120px;
+}
+
+.section-subtitle {
+    color: var(--dark-gray);
+    max-width: 600px;
+    margin: 0 auto;
+    background: var(--white); /* White background for subtitle readability */
+    padding: 10px 20px;
+    border-radius: 10px;
+    box-shadow: var(--shadow-light);
+    animation: fadeInScale 1s ease-out 0.3s both;
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Category Cards - White background with blue borders/accents */
+.category-card {
+    border: 2px solid transparent;
+    background: var(--white);
+    border-radius: 15px;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+    box-shadow: var(--shadow-light);
+}
+
+.category-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(26, 86, 219, 0.1), transparent); /* Subtle blue shimmer */
+    transition: left 0.6s;
+}
+
+.category-card:hover::before {
+    left: 100%;
+}
+
+.category-card:hover {
+    transform: translateY(-10px) rotateX(5deg);
+    box-shadow: var(--shadow-medium);
+    border-color: var(--primary-blue);
+    background: linear-gradient(145deg, var(--white), rgba(59, 130, 246, 0.05)); /* Light blue-white gradient on hover */
+}
+
+.category-card i {
+    color: var(--primary-blue);
+    font-size: 3rem; /* Larger icon for attractiveness */
+    transition: all 0.3s ease;
+    animation: iconRotate 3s linear infinite;
+}
+
+@keyframes iconRotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.category-card:hover i {
+    color: var(--secondary-blue);
+    transform: scale(1.2) rotate(0deg);
+    animation-play-state: paused;
+}
+
+/* Product Cards - White cards with blue image overlays and animations */
+.product-card {
+    border: 2px solid transparent;
+    background: var(--white);
+    border-radius: 15px;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    height: 100%;
+    position: relative;
+    box-shadow: var(--shadow-light);
+}
+
+.product-card::after {
+    content: 'New'; /* Default badge; can be overridden with data-attribute */
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: linear-gradient(135deg, var(--primary-blue), var(--accent-orange));
+    color: var(--white);
+    padding: 8px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    opacity: 0;
+    transform: scale(0);
+    transition: all 0.3s ease;
+    z-index: 3;
+}
+
+.product-card:hover::after {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.product-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-heavy);
+    border-color: var(--secondary-blue);
+}
+
+.product-image {
+    height: 220px; /* Slightly taller for better image display */
+    object-fit: cover;
+    width: 100%;
+    position: relative;
+    transition: all 0.5s ease;
+    background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue)); /* Blue gradient fallback for images */
+}
+
+.product-card:hover .product-image {
+    transform: scale(1.1) brightness(1.1); /* Zoom and brighten for attractiveness */
+    filter: drop-shadow(0 5px 15px rgba(26, 86, 219, 0.3)); /* Blue shadow on image */
+}
+
+.product-card-body {
+    padding: 25px;
+    background: var(--white);
+    position: relative;
+    z-index: 2;
+}
+
+.product-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: var(--dark-blue);
+    transition: color 0.3s ease;
+}
+
+.product-card:hover .product-title {
+    color: var(--primary-blue);
+}
+
+.product-specs {
+    font-size: 0.9rem;
+    color: var(--dark-gray);
+    margin-bottom: 18px;
+    line-height: 1.5;
+    background: rgba(248, 250, 252, 0.5); /* Light white-gray for specs */
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.product-price {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--primary-blue);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for pop */
+    animation: priceBounce 2s infinite;
+}
+
+@keyframes priceBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+
+/* Trust Indicators - Blue and white styling */
+.counter {
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: var(--primary-blue);
+    background: var(--white);
+    padding: 10px 20px;
+    border-radius: 10px;
+    box-shadow: var(--shadow-light);
+    animation: counterFade 1.5s ease-out;
+}
+
+@keyframes counterFade {
+    from { opacity: 0; transform: scale(0.8); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* Social Links - White circles with blue hover */
+.social-links a {
+    display: inline-block;
+    width: 45px;
+    height: 45px;
+    background: var(--white);
+    border: 2px solid var(--medium-gray);
+    border-radius: 50%;
+    text-align: center;
+    line-height: 41px;
+    margin-right: 12px;
+    transition: all 0.4s ease;
+    color: var(--primary-blue);
+    position: relative;
+    overflow: hidden;
+}
+
+.social-links a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+    transition: left 0.5s;
+}
+
+.social-links a:hover::before {
+    left: 100%;
+}
+
+.social-links a:hover {
+    background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+    border-color: var(--primary-blue);
+    color: var(--white);
+    transform: translateY(-5px) rotate(360deg);
+    box-shadow: var(--shadow-medium);
+}
+
+/* Navbar - Blue and white theme */
+.navbar {
+    background: var(--white) !important;
+    box-shadow: var(--shadow-light);
+}
+
+.navbar-brand {
+    font-weight: 700;
+    font-size: 1.6rem;
+    color: var(--primary-blue);
+    transition: all 0.3s ease;
+}
+
+.navbar-brand:hover {
+    color: var(--secondary-blue);
+    transform: scale(1.05);
+}
+
+.navbar-brand i {
+    color: var(--accent-orange);
+    transition: color 0.3s ease;
+}
+
+.navbar-brand:hover i {
+    color: var(--primary-blue);
+}
+
+.navbar-nav .nav-link {
+    font-weight: 500;
+    margin: 0 0px;
+    color: var(--dark-gray);
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.navbar-nav .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    width: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary-blue), var(--white));
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+
+.navbar-nav .nav-link:hover::after {
+    width: 100%;
+}
+
+.navbar-nav .nav-link:hover {
+    color: var(--primary-blue) !important;
+    transform: translateY(-2px);
+}
+
+/* Buttons - Blue gradient with white text */
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+    border: none;
+    border-radius: 25px;
+    padding: 14px 32px;
+    font-weight: 600;
+    color: var(--white);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--shadow-light);
+}
+
+.btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 0.6s ease;
+}
+
+.btn-primary:hover::before {
+    width: 400px;
+    height: 400px;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, var(--dark-blue), var(--primary-blue));
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: var(--shadow-medium);
+}
+
+.btn-outline-primary {
+    color: var(--primary-blue);
+    border: 2px solid var(--primary-blue);
+    background: var(--white);
+    border-radius: 25px;
+    padding: 14px 32px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-outline-primary:hover {
+    background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+    border-color: transparent;
+    color: var(--white);
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-medium);
+}
+
+/* General Load Animations for Cards - Staggered entry */
+.category-card, .product-card {
+    animation: cardSlideIn 0.7s ease-out forwards;
+    opacity: 0;
+    transform: translateX(-50px);
+}
+
+.category-card:nth-child(even), .product-card:nth-child(even) { animation-delay: 0.2s; }
+.category-card:nth-child(3n), .product-card:nth-child(3n) { animation-delay: 0.4s; }
+
+@keyframes cardSlideIn {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Full Responsive Design - Blue-white theme adapts across devices */
+@media (max-width: 1200px) {
+    .hero-image {
+        width: 450px;
+        height: 360px;
+    }
+    
+    .product-image {
+        height: 200px;
+    }
+}
+
+@media (max-width: 992px) {
+    .hero-section {
+        padding: 100px 0;
+        text-align: center;
+    }
+    
+    .hero-image {
+        width: 100%;
+        max-width: 400px;
+        height: auto;
+        margin: 20px auto;
+        transform: none;
+    }
+    
+    .category-card i, .product-card i {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-section {
+        padding: 70px 0;
+    }
+    
+    .hero-image {
+        animation: none; /* Simplify for mobile performance */
+    }
+    
+    .counter {
+        font-size: 2.2rem;
+    }
+    
+    .product-card, .category-card {
+        margin-bottom: 25px;
+        transform: none !important; /* Disable 3D on small screens */
+    }
+    
+    .section-title {
+        padding-top: 40px;
+        font-size: 1.7rem;
+    }
+    
+    .navbar-nav .nav-link {
+        margin: 5px 0;
+        text-align: center;
+    }
+    
+    .social-links {
+        text-align: center;
+    }
+    
+    .social-links a {
+        margin: 5px;
+    }
+    
+    .btn-primary, .btn-outline-primary {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
+
+@media (max-width: 576px) {
+    body {
+        font-size: 0.95rem;
+    }
+    
+    .hero-section {
+        padding: 50px 0;
+    }
+    
+    .product-image {
+        height: 160px;
+    }
+    
+    .product-card-body {
+        padding: 20px;
+    }
+    
+    .product-title {
+        font-size: 1.1rem;
+    }
+    
+    .counter {
+        font-size: 1.9rem;
+        padding: 8px 15px;
+    }
+    
+    .section-subtitle {
+        padding: 8px 15px;
+        font-size: 0.95rem;
+    }
+}
+
+/* Smooth Scrolling and Accessibility */
+html {
+    scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    .hero-section {
+        animation: none;
+    }
+}
